@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eli M. Nate</title>
+<meta name="description" content="Eli M. Nate writes murder-mystery elimination puzzle books. Thousands of suspects, a stack of clues, one killer.">
+<link rel="icon" href="img/logo-sm.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap">
+<style>
+/* Layout concept: a tabloid case-file poster in the brand's black, cream and hot pink.
+   Condensed headline type like the covers, typewriter case notes, pink pencil strikes. */
+:root {
+  --paper: #FBF8F0;
+  --paper-2: #F2ECDF;
+  --card: #FFFFFF;
+  --ink: #141214;
+  --muted: #5F5A55;
+  --rule: #E2DACB;
+  --pink: #FF0A6C;
+  --pink-ink: #D4005A;
+  --night: #121012;
+  --night-fg: #FBF8F0;
+
+  --c-gift: #12913F;
+  --c-ticket: #E8106E;
+  --c-baby: #7B2CBF;
+
+  --display: "Anton", "Impact", "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --type: "Courier Prime", "Courier New", Courier, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #131113; --paper-2: #1C191C; --card: #221E22; --ink: #F6F1E7; --muted: #ADA69D;
+    --rule: #332D31; --pink: #FF2A7E; --pink-ink: #FF5C9A; --night: #0A090A; --night-fg: #FBF8F0;
+    --c-gift: #3CC46B; --c-ticket: #FF4B91; --c-baby: #B47CF0; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #131113; --paper-2: #1C191C; --card: #221E22; --ink: #F6F1E7; --muted: #ADA69D;
+  --rule: #332D31; --pink: #FF2A7E; --pink-ink: #FF5C9A; --night: #0A090A; --night-fg: #FBF8F0;
+  --c-gift: #3CC46B; --c-ticket: #FF4B91; --c-baby: #B47CF0; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1.0625rem; line-height: 1.6; }
+a { color: inherit; text-decoration-color: var(--pink); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a:hover { color: var(--pink-ink); }
+:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 0.98; text-transform: uppercase; text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+p { margin: 0; }
+img { display: block; max-width: 100%; }
+
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(18px, env(safe-area-inset-left, 0px));
+  padding-right: max(18px, env(safe-area-inset-right, 0px));
+}
+.kicker { font-family: var(--display); font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink-ink); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font-family: var(--display); font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 12px 22px 11px; border: 2px solid var(--pink); background: var(--pink); color: #fff; text-decoration: none;
+  transition: transform .15s ease, background .15s ease;
+}
+.btn:hover { color: #fff; transform: translateY(-2px); background: var(--pink-ink); border-color: var(--pink-ink); }
+.btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
+.btn.ghost:hover { color: var(--pink); border-color: var(--pink); background: transparent; }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+
+/* ---------- Header ---------- */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night); }
+.site-head { background: var(--night); color: var(--night-fg); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; border-bottom: 3px solid var(--pink); }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; padding-block: 10px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--night-fg); }
+.brand img { width: 46px; height: 46px; }
+.brand span { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.04em; }
+.nav { display: flex; align-items: center; gap: 6px 22px; flex-wrap: wrap; font-family: var(--display); letter-spacing: 0.07em; text-transform: uppercase; font-size: 0.98rem; }
+.nav a { color: var(--night-fg); text-decoration: none; }
+.nav a:hover { color: var(--pink); }
+.nav .btn { padding: 7px 14px 6px; font-size: 0.95rem; }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--night); color: var(--night-fg); overflow: hidden; position: relative; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: radial-gradient(60% 70% at 78% 40%, rgba(255, 10, 108, 0.28), transparent 70%);
+}
+.hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 40px; align-items: center; padding-block: clamp(44px, 7vw, 92px) clamp(52px, 7vw, 96px); }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero-copy .kicker { color: var(--pink); }
+.hero h1 { font-size: clamp(3rem, 7.2vw, 5.8rem); line-height: 1.04; }
+.hero h1 .row { display: block; }
+.hero h1 .pk { color: var(--pink); }
+.hero h1 .strike { position: relative; display: inline-block; color: rgba(251, 248, 240, 0.45); }
+.hero h1 .strike::after {
+  content: ""; position: absolute; left: -3%; right: -3%; top: 50%; height: 0.11em; border-radius: 4px;
+  background: var(--pink); transform: rotate(-3deg) scaleX(0); transform-origin: left center;
+  animation: strike .55s .5s ease-out forwards;
+}
+@keyframes strike { to { transform: rotate(-3deg) scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .hero h1 .strike::after { animation: none; transform: rotate(-3deg) scaleX(1); } }
+.hero .lede { font-size: 1.2rem; line-height: 1.55; max-width: 36ch; color: rgba(251, 248, 240, 0.82); }
+.hero .lede b { color: var(--night-fg); }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero .btn.ghost { color: var(--night-fg); }
+
+.fan { position: relative; height: clamp(360px, 44vw, 520px); min-width: 0; }
+.fan a { position: absolute; top: 50%; left: 50%; width: clamp(150px, 19vw, 240px); aspect-ratio: 2 / 3; max-width: 100%;
+  box-shadow: 0 30px 50px -18px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), z-index 0s; }
+.fan img { width: 100%; height: 100%; object-fit: cover; }
+.fan a:nth-child(1) { transform: translate(-100%, -47%) rotate(-8deg); z-index: 1; }
+.fan a:nth-child(2) { transform: translate(-50%, -53%) rotate(0deg); z-index: 3; }
+.fan a:nth-child(3) { transform: translate(0%, -47%) rotate(8deg); z-index: 2; }
+.fan a:hover, .fan a:focus-visible { z-index: 4; }
+.fan a:nth-child(1):hover { transform: translate(-100%, -53%) rotate(-5deg) scale(1.04); }
+.fan a:nth-child(2):hover { transform: translate(-50%, -58%) scale(1.04); }
+.fan a:nth-child(3):hover { transform: translate(0%, -53%) rotate(5deg) scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .fan a { transition: none; } }
+
+/* Stat strip */
+.tally { background: var(--pink); color: #fff; }
+.tally .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; padding-block: 0; }
+.tally div { padding: 18px 12px; text-align: center; display: grid; gap: 2px; }
+.tally div + div { border-left: 2px solid rgba(255, 255, 255, 0.35); }
+.tally b { font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem, 4.4vw, 3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.tally span { font-family: var(--display); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem; opacity: 0.92; }
+
+/* ---------- Section frame ---------- */
+section.band > .wrap { padding-block: clamp(56px, 8vw, 104px); display: grid; gap: clamp(32px, 4vw, 52px); }
+.sec-head { display: grid; gap: 12px; max-width: 64ch; }
+.sec-head h2 { font-size: clamp(2.4rem, 5.4vw, 4rem); }
+.sec-head p { color: var(--muted); font-size: 1.12rem; }
+
+/* ---------- Case files (books) ---------- */
+.cases { display: grid; gap: clamp(56px, 8vw, 96px); }
+.case { --c: var(--pink); display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.case.flip { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.case.flip .cover-wrap { order: 2; }
+.case.gift { --c: var(--c-gift); }
+.case.ticket { --c: var(--c-ticket); }
+.case.baby { --c: var(--c-baby); }
+.cover-wrap { position: relative; justify-self: center; width: min(100%, 380px); }
+.cover-wrap::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; background: var(--c); opacity: 0.9; }
+.case.flip .cover-wrap::before { inset: 18px 18px -18px -18px; }
+.cover-wrap a { position: relative; display: block; box-shadow: 0 24px 40px -22px rgba(0, 0, 0, 0.6); }
+.cover-wrap img { width: 100%; height: auto; aspect-ratio: 2 / 3; }
+.badge-new {
+  position: absolute; top: -16px; right: -12px; z-index: 2; width: 84px; height: 84px; border-radius: 50%;
+  background: var(--pink); color: #fff; display: grid; place-items: center; text-align: center;
+  font-family: var(--display); font-size: 1rem; line-height: 1; letter-spacing: 0.06em; text-transform: uppercase;
+  transform: rotate(12deg); box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.5);
+}
+.case-copy { display: grid; gap: 18px; min-width: 0; }
+.case-copy .kicker { color: var(--c); }
+.case-copy h3 { font-size: clamp(2.5rem, 5.6vw, 4.4rem); }
+.case-copy h3 em { font-style: normal; color: var(--c); }
+.stats { font-family: var(--display); font-size: clamp(1.25rem, 2.4vw, 1.7rem); letter-spacing: 0.03em; text-transform: uppercase; line-height: 1.15; }
+.stats span:nth-child(odd) { color: var(--c); }
+.stats span + span::before { content: " \00B7  "; color: var(--muted); }
+.casenote {
+  font-family: var(--type); font-size: 1rem; line-height: 1.6; background: var(--card); border: 1px solid var(--rule);
+  padding: 18px 20px; position: relative; max-width: 62ch;
+}
+.casenote::before {
+  content: "Case notes"; position: absolute; top: -12px; left: 16px; background: var(--c); color: #fff;
+  font-family: var(--display); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.8rem; padding: 2px 10px;
+}
+.casenote p + p { margin-top: 10px; }
+.casenote mark { background: none; color: var(--c); font-weight: 700; }
+.buy-row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.case .btn { background: var(--c); border-color: var(--c); }
+.case .btn:hover { filter: brightness(0.92); }
+.case .btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.case .btn.ghost:hover { color: var(--c); border-color: var(--c); filter: none; }
+.soon { font-family: var(--type); font-size: 0.9rem; color: var(--muted); }
+.series-cta { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: center; padding: 26px; border: 2px dashed var(--rule); text-align: center; }
+.series-cta p { font-family: var(--display); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+/* ---------- How it works ---------- */
+.dark { background: var(--night); color: var(--night-fg); }
+.dark .sec-head p { color: rgba(251, 248, 240, 0.75); }
+.dark .kicker { color: var(--pink); }
+.how { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 60px); align-items: start; }
+.steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--pink); }
+.step { padding: 20px 18px 22px 0; display: grid; gap: 8px; align-content: start; border-bottom: 1px solid rgba(251, 248, 240, 0.16); }
+.step:nth-child(even) { padding-left: 18px; border-left: 1px solid rgba(251, 248, 240, 0.16); }
+.step svg { width: 42px; height: 42px; color: var(--pink); }
+.step h3 { font-size: 1.6rem; }
+.step p { color: rgba(251, 248, 240, 0.75); font-size: 0.98rem; }
+
+.ledger { background: var(--card); color: var(--ink); border: 1px solid var(--rule); min-width: 0; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7); }
+.dark .ledger { transform: rotate(1.2deg); }
+.ledger-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 18px 10px 44px; border-bottom: 3px solid var(--ink); }
+.ledger-head .store { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.remaining { font-family: var(--type); font-size: 0.85rem; color: var(--muted); }
+.ledger table { width: 100%; border-collapse: collapse; font-family: var(--type); font-size: 0.86rem; font-variant-numeric: tabular-nums; }
+.ledger td { padding: 6px 10px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.ledger tr:nth-child(even) td { background: var(--paper-2); }
+.ledger td.n { color: var(--muted); width: 34px; text-align: right; padding-left: 0; border-right: 2px double var(--pink); }
+.ledger td.item { font-family: var(--body); font-size: 0.93rem; white-space: normal; }
+.ledger td.num { text-align: right; }
+.ledger td.item span { position: relative; }
+.ledger .item span::after {
+  content: ""; position: absolute; left: -4px; right: -4px; top: 50%; height: 3px; border-radius: 2px;
+  background: var(--pink); transform-origin: left center; transform: scaleX(0) rotate(-2deg); transition: transform .35s ease-out;
+}
+.ledger tr.out td { color: var(--muted); }
+.ledger tr.out .item span::after { transform: scaleX(1) rotate(-2deg); }
+.ledger tr.hit .item span { outline: 3px solid var(--pink); outline-offset: 3px; border-radius: 999px; padding: 0 7px; margin-left: -7px; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .ledger .item span::after { transition: none; } }
+.ticker { display: flex; gap: 12px; align-items: baseline; padding: 12px 18px 14px 44px; min-height: 66px; border-top: 3px solid var(--ink); font-family: var(--type); font-size: 0.95rem; }
+.ticker .tag { flex: none; font-family: var(--display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink-ink); }
+.scroll-x { overflow-x: auto; }
+
+/* ---------- Try a page ---------- */
+.trial { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(28px, 4vw, 52px); align-items: start; }
+.postcards { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.postcard {
+  background: var(--card); border: 1px solid var(--rule); padding: 14px 16px 14px 18px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px;
+  box-shadow: 0 10px 22px -18px rgba(0, 0, 0, 0.5);
+}
+.postcard:nth-child(odd) { transform: rotate(-0.6deg); }
+.postcard:nth-child(even) { transform: rotate(0.5deg); }
+.postcard .no { grid-row: span 2; font-family: var(--display); font-size: 2.3rem; line-height: 1; color: var(--pink); }
+.postcard b { font-family: var(--body); font-weight: 700; }
+.postcard i { font-family: var(--type); color: var(--muted); font-size: 0.95rem; }
+.rules-note { font-family: var(--type); font-size: 0.92rem; color: var(--muted); padding-top: 4px; }
+.play tr { cursor: pointer; }
+.play tr:hover td { background: color-mix(in srgb, var(--pink) 8%, var(--card)); }
+.play td.item button { all: unset; cursor: pointer; display: block; width: 100%; }
+.play td.item button:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.play-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 12px 18px 14px 44px; border-top: 3px solid var(--ink); }
+.play-bar .hint { font-family: var(--type); font-size: 0.9rem; color: var(--muted); }
+.play-bar .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.play-bar .btn { padding: 7px 14px 6px; font-size: 0.95rem; }
+.play-bar .btn.ghost { color: var(--ink); }
+.verdict { padding: 0 18px 16px 44px; min-height: 1.7em; font-weight: 700; }
+.verdict.win { color: var(--c-gift); }
+.verdict.miss { color: var(--pink-ink); }
+
+/* ---------- About ---------- */
+.about { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.about .logo { width: min(100%, 380px); height: auto; justify-self: center; filter: drop-shadow(0 22px 30px rgba(0, 0, 0, 0.18)); }
+.about-copy { display: grid; gap: 16px; max-width: 60ch; }
+.about-copy h2 { font-size: clamp(2.6rem, 6vw, 4.6rem); }
+.about-copy h2 .pk { color: var(--pink); }
+.about-copy p { font-size: 1.08rem; }
+.follow { display: grid; gap: 12px; padding: 20px 22px; background: var(--night); color: var(--night-fg); margin-top: 6px; }
+.follow h3 { font-size: 1.6rem; }
+.follow p { color: rgba(251, 248, 240, 0.78); font-size: 1rem; }
+.follow .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+.follow .btn { font-size: 1rem; padding: 9px 16px 8px; }
+.follow .btn.ghost { color: var(--night-fg); }
+
+/* ---------- Footer ---------- */
+.site-foot { background: var(--night); color: rgba(251, 248, 240, 0.7); border-top: 3px solid var(--pink); }
+.site-foot .wrap { padding-block: 26px 36px; display: flex; gap: 12px 24px; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.92rem; }
+.site-foot .brand span { font-size: 1.2rem; }
+.site-foot .brand img { width: 36px; height: 36px; }
+.site-foot nav { display: flex; gap: 8px 18px; flex-wrap: wrap; }
+.site-foot a { color: var(--night-fg); text-decoration: none; }
+.site-foot a:hover { color: var(--pink); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 920px) {
+  .hero .wrap, .how, .trial, .about { grid-template-columns: 1fr; }
+  .fan { height: clamp(300px, 70vw, 440px); }
+  .fan a { width: clamp(118px, 30vw, 220px); }
+  .case, .case.flip { grid-template-columns: 1fr; }
+  .case.flip .cover-wrap { order: 0; }
+  .cover-wrap { width: min(78%, 340px); }
+}
+@media (max-width: 560px) {
+  .nav .hide-sm { display: none; }
+  .tally div { padding: 14px 6px; }
+  .tally span { font-size: 0.75rem; letter-spacing: 0.06em; }
+  .steps { grid-template-columns: 1fr; }
+  .step:nth-child(even) { padding-left: 0; border-left: 0; }
+  .ledger-head, .ticker, .play-bar, .verdict { padding-left: 14px; padding-right: 14px; }
+  .ledger td { padding: 6px 6px; }
+  .ledger td.n { width: 24px; }
+  .dark .ledger { transform: none; }
+  .badge-new { width: 70px; height: 70px; font-size: 0.85rem; right: -6px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top" id="top"><img src="img/logo-sm.png" alt="" width="46" height="46"><span>Eli M. Nate</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#cases">The books</a>
+      <a href="#how" class="hide-sm">How it works</a>
+      <a href="#try">Try a case</a>
+      <a href="#about" class="hide-sm">About</a>
+      <a class="btn" href="https://www.amazon.com/stores/Eli-M.-Nate/author/B0HDV2H19G" target="_blank" rel="noopener">Shop</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="kicker">Murder mystery puzzle elimination books</span>
+        <h1>
+          <span class="row">Thousands of</span>
+          <span class="row"><span class="strike">suspects.</span></span>
+          <span class="row pk">One killer.</span>
+        </h1>
+        <p class="lede">Every book is a real ledger of <b>10,000+ records</b> and a stack of clues. Cross out everyone the killer couldn't be, until <b>one name is left standing.</b></p>
+        <div class="ctas">
+          <a class="btn" href="#cases">See the cases</a>
+          <a class="btn ghost" href="#try">Try a mini case</a>
+        </div>
+      </div>
+      <div class="fan" aria-label="The three books">
+        <a href="https://www.amazon.com/dp/B0HM6SWZ1X" target="_blank" rel="noopener"><img src="img/baby-cover.jpg" alt="The Killer Chose A Baby Name, cover" width="800" height="1200"></a>
+        <a href="https://www.amazon.com/gp/product/B0HQ5KLMDV" target="_blank" rel="noopener"><img src="img/gift-cover.jpg" alt="The Killer Bought A Gift, cover" width="800" height="1200"></a>
+        <a href="https://www.amazon.com/dp/B0HBKW8HH6" target="_blank" rel="noopener"><img src="img/ticket-cover.jpg" alt="The Killer Bought A Ticket, cover" width="800" height="1200"></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="tally" aria-label="Across the series so far">
+    <div class="wrap">
+      <div><b>68,511</b><span>Suspects</span></div>
+      <div><b>54</b><span>Clues</span></div>
+      <div><b>3</b><span>Killers</span></div>
+    </div>
+  </div>
+
+  <section class="band" id="cases">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">The case files</span>
+        <h2>Three crimes. Every clue inside the book.</h2>
+        <p>Each book is a standalone mystery. Pick the case that grabs you and start crossing out.</p>
+      </div>
+
+      <div class="cases">
+        <article class="case gift">
+          <div class="cover-wrap">
+            <span class="badge-new">New<br>case</span>
+            <a href="https://www.amazon.com/gp/product/B0HQ5KLMDV" target="_blank" rel="noopener"><img src="img/gift-cover.jpg" alt="The Killer Bought A Gift, cover" width="800" height="1200" loading="lazy"></a>
+          </div>
+          <div class="case-copy">
+            <span class="kicker">Kettlebrook Mall &middot; December 23</span>
+            <h3>The <em>Killer</em> Bought A Gift</h3>
+            <p class="stats"><span>10,500 gifts</span><span>16 clues</span><span>1 killer</span></p>
+            <div class="casenote">
+              <p>December 23. Two days until Christmas. Kettlebrook Mall is bursting with last-minute shoppers, and somewhere in the holiday rush, a killer made one final purchase.</p>
+              <p>When Dale Whitcomb is found dead in his pickup truck, beside him are torn wrapping paper, a curl of red ribbon, and a gift tag bearing his name. <mark>But the gift is gone.</mark></p>
+            </div>
+            <div class="buy-row">
+              <a class="btn" href="https://www.amazon.com/gp/product/B0HQ5KLMDV" target="_blank" rel="noopener">Buy on Amazon</a>
+              <span class="soon">Barnes &amp; Noble: coming soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case ticket flip">
+          <div class="cover-wrap">
+            <a href="https://www.amazon.com/dp/B0HBKW8HH6" target="_blank" rel="noopener"><img src="img/ticket-cover.jpg" alt="The Killer Bought A Ticket, cover" width="800" height="1200" loading="lazy"></a>
+          </div>
+          <div class="case-copy">
+            <span class="kicker">Meridian Stadium &middot; One night</span>
+            <h3>The <em>Killer</em> Bought A Ticket</h3>
+            <p class="stats"><span>47,093 suspects</span><span>16 clues</span><span>1 killer</span></p>
+            <div class="casenote">
+              <p>A global music icon is murdered during his final concert. 47,093 people were in the stadium. Security sealed every gate. The killer walked out with the crowd.</p>
+              <p>Weeks later, <mark>sixteen postcards</mark> arrive at the precinct. Each one contains a clue.</p>
+            </div>
+            <div class="buy-row">
+              <a class="btn" href="https://www.amazon.com/dp/B0HBKW8HH6" target="_blank" rel="noopener">Buy on Amazon</a>
+              <a class="btn ghost" href="https://www.barnesandnoble.com/s/The%20Killer%20Bought%20A%20Ticket" target="_blank" rel="noopener">Barnes &amp; Noble</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case baby">
+          <div class="cover-wrap">
+            <a href="https://www.amazon.com/dp/B0HM6SWZ1X" target="_blank" rel="noopener"><img src="img/baby-cover.jpg" alt="The Killer Chose A Baby Name, cover" width="800" height="1200" loading="lazy"></a>
+          </div>
+          <div class="case-copy">
+            <span class="kicker">The First Light Fund &middot; Live reveal</span>
+            <h3>The <em>Killer</em> Chose A Baby Name</h3>
+            <p class="stats"><span>10,918 names</span><span>21 ballrooms</span><span>1 killer</span></p>
+            <div class="casenote">
+              <p>America's favorite celebrity couple is expecting, and they're hosting a one-of-a-kind charity baby-name event. Guests donate to claim a name from the official register, and all 10,918 names are taken within a week.</p>
+              <p>During the live reveal, the event organizer is found dead. <mark>The killer is a guest, and they chose a name.</mark></p>
+            </div>
+            <div class="buy-row">
+              <a class="btn" href="https://www.amazon.com/dp/B0HM6SWZ1X" target="_blank" rel="noopener">Buy on Amazon</a>
+              <a class="btn ghost" href="https://www.barnesandnoble.com/s/The%20Killer%20Chose%20A%20Baby%20Name" target="_blank" rel="noopener">Barnes &amp; Noble</a>
+            </div>
+          </div>
+        </article>
+
+        <div class="series-cta">
+          <p>Want them all?</p>
+          <a class="btn" href="https://www.amazon.com/dp/B0HM53Q6G3" target="_blank" rel="noopener">See the full series</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">How it works</span>
+        <h2>No riddles. No trick logic. Just you and a pencil.</h2>
+        <p>Every clue is a simple yes-or-no test you can check against a single row. Work them in order or read them all first. You'll land in the same place either way.</p>
+      </div>
+      <div class="how">
+        <div class="steps">
+          <div class="step">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true"><circle cx="20" cy="20" r="12" fill="none"/><path d="M29 29l12 12"/></svg>
+            <h3>Search the ledger</h3>
+            <p>Thousands of records: sales, tickets or names, each with its own details and number.</p>
+          </div>
+          <div class="step">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true"><path d="M8 12l12 12M20 12L8 24M28 12l12 12M40 12L28 24"/><path d="M8 36h32"/></svg>
+            <h3>Eliminate thousands</h3>
+            <p>Sixteen to twenty-two clues, each with a piece of the story. Every one crosses out a fresh chunk.</p>
+          </div>
+          <div class="step">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true"><rect x="10" y="6" width="28" height="36" rx="2" fill="none"/><path d="M17 16h14M17 24h14M17 32h8"/></svg>
+            <h3>Narrow it down</h3>
+            <p>Eight to ten suspects survive. Ordinary-looking, every one of them.</p>
+          </div>
+          <div class="step">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="none"/><circle cx="24" cy="20" r="6" fill="none"/><path d="M14 36c3-5 6-7 10-7s7 2 10 7"/></svg>
+            <h3>Find the killer</h3>
+            <p>The final clue compares the survivors. Unlock the confession and find out if you were right.</p>
+          </div>
+        </div>
+
+        <figure class="ledger" style="margin:0" aria-label="Example: clues cross out ledger rows until one item is left">
+          <div class="ledger-head">
+            <span class="store">Dec 23 &middot; Gift sales</span>
+            <span class="remaining" id="heroLeft">10 left</span>
+          </div>
+          <div class="scroll-x"><table id="heroTable"><tbody></tbody></table></div>
+          <figcaption class="ticker" aria-live="polite">
+            <span class="tag" id="heroClueNo">Clue 1</span>
+            <span id="heroClue">The killer wouldn't buy a Set, Kit, Pack or Pair.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="try">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Try a mini case</span>
+        <h2>One candle shop. Sixteen sales. Four postcards.</h2>
+        <p>A pocket-sized case in the style of the books. Tap a row to cross it out, and tap again to bring it back. When one row is left, you'll find out if you caught the killer's purchase.</p>
+      </div>
+      <div class="trial">
+        <div style="display:grid;gap:16px;min-width:0">
+          <ol class="postcards">
+            <li class="postcard"><span class="no">1</span><b>No Set, Kit, Pack, Pair, Trio or Sampler.</b><i>The killer wanted one thing, wrapped and done. No bundles.</i></li>
+            <li class="postcard"><span class="no">2</span><b>The price is $40.00 or less.</b><i>The card on file had $40 left on it that night.</i></li>
+            <li class="postcard"><span class="no">3</span><b>The name has letters and spaces only.</b><i>The torn receipt shows the item line. No numbers, no &amp;, no punctuation.</i></li>
+            <li class="postcard"><span class="no">4</span><b>The transaction number's last digit differs from the price's last digit.</b><i>The register voided sales with matching endings. The killer's went through.</i></li>
+          </ol>
+          <p class="rules-note">A price's last digit is its last cents digit, so $24.00 ends in 0.</p>
+        </div>
+        <div class="play">
+          <div class="ledger">
+            <div class="ledger-head">
+              <span class="store">Juniper &amp; Wick Candles</span>
+              <span class="remaining" id="playLeft">16 left</span>
+            </div>
+            <div class="scroll-x"><table id="playTable"><tbody></tbody></table></div>
+            <div class="play-bar">
+              <span class="hint">Tap a row to cross it out</span>
+              <div class="btns">
+                <button class="btn ghost" type="button" id="resetBtn">Start over</button>
+                <button class="btn ghost" type="button" id="solveBtn">Show solution</button>
+              </div>
+            </div>
+            <p class="verdict" id="verdict" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="about" style="border-top:1px solid var(--rule)">
+    <div class="wrap">
+      <div class="about">
+        <img class="logo" src="img/logo.png" alt="Eli M. Nate logo: a black fedora with a pink band above the name, crossed out with a pink pencil stroke" width="640" height="640">
+        <div class="about-copy">
+          <span class="kicker">About the author</span>
+          <h2>Say it fast: <span class="pk">Eli M. Nate.</span></h2>
+          <p>Eli M. Nate writes murder mysteries you solve yourself, one crossed-out row at a time. The pen name is the whole method.</p>
+          <p>Every case starts with an ordinary crowd: shoppers at a mall, fans at a concert, guests at a party. Somewhere in their records is the one the killer left behind. The clues are fair and checkable, and they never ask you to guess what the author was thinking.</p>
+          <p>Every book is tested so no clue lets you skip a chapter and every reader who does the work lands on the same answer.</p>
+          <div class="follow">
+            <h3>Be first on the next case</h3>
+            <p>Follow Eli M. Nate on Amazon, and Amazon will email you when a new book comes out.</p>
+            <div class="ctas">
+              <a class="btn" href="https://www.amazon.com/stores/Eli-M.-Nate/author/B0HDV2H19G" target="_blank" rel="noopener">Follow on Amazon</a>
+              <a class="btn ghost" href="https://www.amazon.com/dp/B0HM53Q6G3" target="_blank" rel="noopener">The full series</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="img/logo-sm.png" alt="" width="36" height="36"><span>Eli M. Nate</span></a>
+    <nav aria-label="Stores">
+      <a href="https://www.amazon.com/stores/Eli-M.-Nate/author/B0HDV2H19G" target="_blank" rel="noopener">Amazon author page</a>
+      <a href="https://www.amazon.com/dp/B0HM53Q6G3" target="_blank" rel="noopener">The series</a>
+      <a href="https://www.barnesandnoble.com/s/Eli%20M.%20Nate" target="_blank" rel="noopener">Barnes &amp; Noble</a>
+    </nav>
+    <span>&copy; 2026 Eli M. Nate</span>
+  </div>
+</footer>
+
+<script>
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+/* ---------- How-it-works ledger animation ---------- */
+const HERO_ROWS = [
+  ["Sterling Oval Locket", "148.00", "21407", 2],
+  ["Cocoa Sampler Box", "24.95", "21409", 1],
+  ["Rose Gold Oval Locket", "96.00", "21412", 4],
+  ["Kids' Instant Camera", "59.99", "21415", 3],
+  ["Plaid Wool Scarf", "38.00", "21419", 4],
+  ["Puzzle Mug Set", "18.99", "21422", 1],
+  ["Cedar Jewelry Box", "64.00", "21426", 0],
+  ["Glass Ornament No. 7", "22.00", "21431", 3],
+  ["Leather Card Wallet", "45.00", "21433", 4],
+  ["Trail Headlamp Pair", "34.95", "21438", 1]
+];
+const HERO_CLUES = [
+  ["Clue 1", "The killer wouldn't buy a Set, Kit, Pack or Pair."],
+  ["Clue 2", "The gift cost $100 or less."],
+  ["Clue 3", "The item line has letters and spaces only."],
+  ["Final clue", "Compare the survivors. Only one fits the confession."]
+];
+
+(function hero() {
+  const tbody = document.querySelector("#heroTable tbody");
+  const trs = HERO_ROWS.map((r, i) => {
+    const tr = document.createElement("tr");
+    const item = el("td", "item"); item.appendChild(el("span", null, r[0]));
+    tr.append(el("td", "n", String(i + 1)), item, el("td", "num", "$" + r[1]), el("td", "num", "#" + r[2]));
+    tbody.appendChild(tr); return tr;
+  });
+  const left = document.getElementById("heroLeft");
+  const no = document.getElementById("heroClueNo");
+  const clue = document.getElementById("heroClue");
+  const setLeft = () => { left.textContent = trs.filter(t => !t.classList.contains("out")).length + " left"; };
+  const setClue = c => { no.textContent = HERO_CLUES[c][0]; clue.textContent = HERO_CLUES[c][1]; };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    HERO_ROWS.forEach((r, i) => trs[i].classList.add(r[3] ? "out" : "hit"));
+    setClue(3); setLeft(); return;
+  }
+  let timers = [];
+  function run() {
+    timers.forEach(clearTimeout); timers = [];
+    trs.forEach(t => t.classList.remove("out", "hit")); setLeft(); setClue(0);
+    let t = 1600;
+    for (let c = 1; c <= 4; c++) {
+      timers.push(setTimeout(() => setClue(c - 1), t)); t += 900;
+      HERO_ROWS.forEach((r, i) => { if (r[3] === c) { timers.push(setTimeout(() => { trs[i].classList.add("out"); setLeft(); }, t)); t += 380; } });
+      t += 1100;
+    }
+    timers.push(setTimeout(() => trs[HERO_ROWS.findIndex(r => r[3] === 0)].classList.add("hit"), t));
+    timers.push(setTimeout(run, t + 4200));
+  }
+  run();
+})();
+
+/* ---------- Mini case ---------- */
+// [item, price, transaction, clue that crosses it out (0 = the answer)]
+const PLAY_ROWS = [
+  ["Balsam Fir Pillar", "24.00", "40110", 4],
+  ["Cedar Votive Trio", "18.00", "40113", 1],
+  ["Blood Orange Taper Pair", "22.00", "40117", 1],
+  ["Midnight Fig Jar", "46.00", "40121", 2],
+  ["Pine & Peppermint", "28.00", "40124", 3],
+  ["Wax Melt Sampler", "14.00", "40126", 1],
+  ["Smoked Vanilla Tin", "16.00", "40130", 4],
+  ["Hearthside No. 9", "38.00", "40133", 3],
+  ["Winter Cabin Pillar", "32.00", "40147", 0],
+  ["Sugared Cranberry Jar", "52.00", "40150", 2],
+  ["Frosted Birch 3-Wick", "64.00", "40152", 2],
+  ["Matchbook Gift Set", "12.00", "40155", 1],
+  ["Snowberry Tealight Pack", "9.00", "40158", 1],
+  ["Fireside Cocoa Jar", "34.00", "40160", 4],
+  ["Mulled Cider Tin", "18.50", "40170", 4],
+  ["Gingerbread Latte Votive", "44.00", "40174", 2]
+];
+
+(function play() {
+  const tbody = document.querySelector("#playTable tbody");
+  const left = document.getElementById("playLeft");
+  const verdict = document.getElementById("verdict");
+  const trs = PLAY_ROWS.map((r, i) => {
+    const tr = document.createElement("tr");
+    const item = el("td", "item");
+    const b = document.createElement("button");
+    b.type = "button"; b.id = "row-" + (i + 1);
+    b.appendChild(el("span", null, r[0]));
+    b.setAttribute("aria-pressed", "false");
+    b.setAttribute("aria-label", r[0] + ", $" + r[1] + ", transaction " + r[2]);
+    item.appendChild(b);
+    tr.append(el("td", "n", String(i + 1)), item, el("td", "num", "$" + r[1]), el("td", "num", "#" + r[2]));
+    tr.addEventListener("click", () => toggle(i));
+    tbody.appendChild(tr); return tr;
+  });
+  function toggle(i) { trs[i].classList.toggle("out"); update(); }
+  function update() {
+    trs.forEach(t => { t.classList.remove("hit"); t.querySelector("button").setAttribute("aria-pressed", t.classList.contains("out") ? "true" : "false"); });
+    const standing = trs.map((t, i) => [t, i]).filter(([t]) => !t.classList.contains("out"));
+    left.textContent = standing.length + " left";
+    verdict.className = "verdict"; verdict.textContent = "";
+    if (standing.length === 1) {
+      const [t, i] = standing[0];
+      if (PLAY_ROWS[i][3] === 0) {
+        t.classList.add("hit"); verdict.classList.add("win");
+        verdict.textContent = "Caught it! The Winter Cabin Pillar, transaction #40147. In the books, that number names the killer.";
+      } else {
+        verdict.classList.add("miss");
+        verdict.textContent = "Not this one. Row " + (i + 1) + " fails postcard " + PLAY_ROWS[i][3] + ", so something you crossed out should still be standing.";
+      }
+    } else if (standing.length === 0) {
+      verdict.classList.add("miss");
+      verdict.textContent = "Everything's crossed out. Bring back the rows that pass all four postcards.";
+    }
+  }
+  document.getElementById("resetBtn").addEventListener("click", () => { trs.forEach(t => t.classList.remove("out")); update(); });
+  document.getElementById("solveBtn").addEventListener("click", () => { trs.forEach((t, i) => t.classList.toggle("out", PLAY_ROWS[i][3] !== 0)); update(); });
+  update();
+})();
+</script>
+</body>
+</html>
