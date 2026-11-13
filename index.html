@@ -9,6 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap">
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '1849991');
+</script>
+<!-- End MailerLite Universal -->
 <style>
 /* Layout concept: a tabloid case-file poster in the brand's black, cream and hot pink.
    Condensed headline type like the covers, typewriter case notes, pink pencil strikes. */
@@ -253,12 +262,15 @@ section.band > .wrap { padding-block: clamp(56px, 8vw, 104px); display: grid; ga
 .about-copy h2 { font-size: clamp(2.6rem, 6vw, 4.6rem); }
 .about-copy h2 .pk { color: var(--pink); }
 .about-copy p { font-size: 1.08rem; }
-.follow { display: grid; gap: 12px; padding: 20px 22px; background: var(--night); color: var(--night-fg); margin-top: 6px; }
+.follow { display: grid; gap: 22px; padding: 24px 22px; background: var(--night); color: var(--night-fg); margin-top: 6px; }
+.follow-block { display: grid; gap: 10px; }
+.follow-block + .follow-block { padding-top: 20px; border-top: 1px solid rgba(251, 248, 240, 0.18); }
 .follow h3 { font-size: 1.6rem; }
 .follow p { color: rgba(251, 248, 240, 0.78); font-size: 1rem; }
 .follow .ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 .follow .btn { font-size: 1rem; padding: 9px 16px 8px; }
 .follow .btn.ghost { color: var(--night-fg); }
+.ml-card { background: var(--paper); padding: 16px; max-width: 420px; }
 
 /* ---------- Footer ---------- */
 .site-foot { background: var(--night); color: rgba(251, 248, 240, 0.7); border-top: 3px solid var(--pink); }
@@ -509,11 +521,19 @@ section.band > .wrap { padding-block: clamp(56px, 8vw, 104px); display: grid; ga
           <p>Every case starts with an ordinary crowd: shoppers at a mall, fans at a concert, guests at a party. Somewhere in their records is the one the killer left behind. The clues are fair and checkable, and they never ask you to guess what the author was thinking.</p>
           <p>Every book is tested so no clue lets you skip a chapter and every reader who does the work lands on the same answer.</p>
           <div class="follow">
-            <h3>Be first on the next case</h3>
-            <p>Follow Eli M. Nate on Amazon, and Amazon will email you when a new book comes out.</p>
-            <div class="ctas">
-              <a class="btn" href="https://www.amazon.com/stores/Eli-M.-Nate/author/B0HDV2H19G" target="_blank" rel="noopener">Follow on Amazon</a>
-              <a class="btn ghost" href="https://www.amazon.com/dp/B0HM53Q6G3" target="_blank" rel="noopener">The full series</a>
+            <div class="follow-block">
+              <h3>Be first on the next case</h3>
+              <p>Join the list for new releases, behind-the-scenes clues, and nothing else.</p>
+              <div class="ml-card">
+                <div class="ml-embedded" data-form="g6iZGo"></div>
+              </div>
+            </div>
+            <div class="follow-block">
+              <p>Prefer Amazon instead? Follow Eli M. Nate there and Amazon will email you when a new book comes out.</p>
+              <div class="ctas">
+                <a class="btn ghost" href="https://www.amazon.com/stores/Eli-M.-Nate/author/B0HDV2H19G" target="_blank" rel="noopener">Follow on Amazon</a>
+                <a class="btn ghost" href="https://www.amazon.com/dp/B0HM53Q6G3" target="_blank" rel="noopener">The full series</a>
+              </div>
             </div>
           </div>
         </div>
