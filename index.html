@@ -271,6 +271,13 @@ section.band > .wrap { padding-block: clamp(56px, 8vw, 104px); display: grid; ga
 .follow .btn { font-size: 1rem; padding: 9px 16px 8px; }
 .follow .btn.ghost { color: var(--night-fg); }
 .ml-card { background: var(--paper); padding: 16px; max-width: 420px; }
+.ml-card, .ml-card *:not(script) { font-family: var(--body) !important; color: var(--ink) !important; }
+.ml-card h1, .ml-card h2, .ml-card h3, .ml-card h4, .ml-card h5 { font-family: var(--display) !important; text-transform: none !important; letter-spacing: 0 !important; }
+.ml-card input, .ml-card textarea { font-family: var(--body) !important; }
+.ml-card button, .ml-card input[type="submit"] {
+  font-family: var(--display) !important; letter-spacing: 0.06em !important; text-transform: uppercase !important;
+  background: var(--pink) !important; border-color: var(--pink) !important; color: #fff !important;
+}
 
 /* ---------- Footer ---------- */
 .site-foot { background: var(--night); color: rgba(251, 248, 240, 0.7); border-top: 3px solid var(--pink); }
