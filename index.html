@@ -281,6 +281,8 @@ section.band > .wrap { padding-block: clamp(56px, 8vw, 104px); display: grid; ga
 .ml-card h1:empty, .ml-card h2:empty, .ml-card h3:empty, .ml-card h4:empty, .ml-card h5:empty, .ml-card p:empty {
   display: none !important; margin: 0 !important; padding: 0 !important; min-height: 0 !important;
 }
+/* Force past any stuck MailerLite fade-in/slide-in animation state */
+.ml-card * { opacity: 1 !important; transform: none !important; transition: none !important; visibility: visible !important; }
 
 /* ---------- Footer ---------- */
 .site-foot { background: var(--night); color: rgba(251, 248, 240, 0.7); border-top: 3px solid var(--pink); }
