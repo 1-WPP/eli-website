@@ -281,6 +281,10 @@ section.band > .wrap { padding-block: clamp(56px, 8vw, 104px); display: grid; ga
 .ml-card h1:empty, .ml-card h2:empty, .ml-card h3:empty, .ml-card h4:empty, .ml-card h5:empty, .ml-card p:empty {
   display: none !important; margin: 0 !important; padding: 0 !important; min-height: 0 !important;
 }
+/* Permanently hide MailerLite's own title/subtitle text, whether or not it's empty —
+   their embed intermittently re-serves a cached version with this text restored. */
+.ml-card h1, .ml-card h2, .ml-card h3, .ml-card h4, .ml-card h5, .ml-card h6 { display: none !important; }
+.ml-card p:not(:has(input, button, textarea, select)) { display: none !important; }
 /* Force past any stuck MailerLite fade-in/slide-in animation state */
 .ml-card * { opacity: 1 !important; transform: none !important; transition: none !important; visibility: visible !important; }
 
