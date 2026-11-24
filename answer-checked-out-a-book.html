@@ -55,10 +55,18 @@ p + p { margin-top: 12px; }
 .feedback.bad { color: var(--bad); }
 
 [hidden] { display: none !important; }
-.reveal-wrap { display: grid; gap: 18px; }
-.reveal { margin-top: 4px; padding: 18px 20px; background: var(--pink); color: #fff; text-align: center; }
-.reveal b { display: block; font-family: var(--display); font-size: 1.3rem; text-transform: uppercase; }
-.reveal span { display: block; font-family: var(--type); font-size: 0.95rem; margin-top: 4px; }
+.reveal-wrap { display: grid; gap: 20px; text-align: center; animation: winIn .5s cubic-bezier(.2,.8,.2,1); }
+@keyframes winIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .reveal-wrap { animation: none; } }
+.win-kicker { font-family: var(--display); color: var(--ok); letter-spacing: 0.1em; text-transform: uppercase; font-size: 1rem; }
+.win-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.95; font-size: clamp(2.4rem, 11vw, 4rem); color: #fff; margin: 0; }
+.win-stats { font-family: var(--type); font-size: 0.95rem; color: rgba(251,248,240,0.7); }
+.win-stats b { color: var(--ok); }
+.reveal { margin: 4px 0; padding: 24px 22px; background: var(--pink); color: #fff; text-align: center; box-shadow: 0 16px 36px -14px rgba(255, 10, 108, 0.55); }
+.reveal b { display: block; font-family: var(--display); font-size: clamp(1.5rem, 5vw, 1.9rem); text-transform: uppercase; }
+.reveal span { display: block; font-family: var(--type); font-size: 1rem; margin-top: 6px; }
+.confession-text { display: grid; gap: 12px; text-align: left; }
+.confession-text .kicker { color: var(--pink); margin-bottom: 2px; }
 .back { margin-top: 8px; font-family: var(--display); letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.95rem; text-decoration: none; display: inline-block; }
 </style>
 </head>
@@ -81,13 +89,18 @@ p + p { margin-top: 12px; }
   </div>
 
   <div id="revealStep" class="reveal-wrap" hidden>
-    <span class="kicker" style="color:var(--ok)">Caught him</span>
-    <p>His name is Walter Hennessey. Margo rejected his self-published local history from this year's Local Voices lineup &mdash; not for the writing, but for the facts: three founding dates he refused to correct, because they matched the version he'd been selling in his "rare" first editions online for years. She recognized his fiction in both places at once.</p>
-    <p>He'd been a patron since the library's very first year open &mdash; card number 10234, the lowest ever issued, a fact Margo used to bring up fondly. That night, he grabbed a book on his way to the Rare Books room, to look like he was there for the showcase like everyone else.</p>
-    <p>The book was <i>The Founding Harbor.</i> He never got the chance to read it.</p>
+    <span class="win-kicker">Case closed</span>
+    <h2 class="win-title">You caught him.</h2>
+    <p class="win-stats">176 checkouts. 4 clues. 1 correct card number. <b>You did it.</b></p>
     <div class="reveal">
       <b>The Founding Harbor</b>
       <span>Card #10234 &mdash; Local History</span>
+    </div>
+    <div class="confession-text">
+      <span class="kicker">The confession</span>
+      <p>His name is Walter Hennessey. Margo rejected his self-published local history from this year's Local Voices lineup &mdash; not for the writing, but for the facts: three founding dates he refused to correct, because they matched the version he'd been selling in his "rare" first editions online for years. She recognized his fiction in both places at once.</p>
+      <p>He'd been a patron since the library's very first year open &mdash; card number 10234, the lowest ever issued, a fact Margo used to bring up fondly. That night, he grabbed a book on his way to the Rare Books room, to look like he was there for the showcase like everyone else.</p>
+      <p>The book was <i>The Founding Harbor.</i> He never got the chance to read it.</p>
     </div>
   </div>
 
