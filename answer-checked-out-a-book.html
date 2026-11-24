@@ -58,10 +58,15 @@ p + p { margin-top: 12px; }
 .reveal-wrap { display: grid; gap: 20px; text-align: center; animation: winIn .5s cubic-bezier(.2,.8,.2,1); }
 @keyframes winIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .reveal-wrap { animation: none; } }
-.win-kicker { font-family: var(--display); color: var(--ok); letter-spacing: 0.1em; text-transform: uppercase; font-size: 1rem; }
-.win-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.95; font-size: clamp(2.4rem, 11vw, 4rem); color: #fff; margin: 0; }
+.win-kicker { font-family: var(--display); color: var(--night-fg); letter-spacing: 0.14em; text-transform: uppercase; font-size: 1.15rem; }
+.win-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.95; font-size: clamp(2.6rem, 12vw, 4.4rem); color: var(--ok); margin: 0; }
 .win-stats { font-family: var(--type); font-size: 0.95rem; color: rgba(251,248,240,0.7); }
 .win-stats b { color: var(--ok); }
+.stamp {
+  justify-self: center; margin-top: 6px; padding: 10px 22px; border: 3px solid var(--ok); color: var(--ok);
+  font-family: var(--display); letter-spacing: 0.1em; text-transform: uppercase; font-size: 1.1rem;
+  transform: rotate(-4deg);
+}
 .reveal { margin: 4px 0; padding: 24px 22px; background: var(--pink); color: #fff; text-align: center; box-shadow: 0 16px 36px -14px rgba(255, 10, 108, 0.55); }
 .reveal b { display: block; font-family: var(--display); font-size: clamp(1.5rem, 5vw, 1.9rem); text-transform: uppercase; }
 .reveal span { display: block; font-family: var(--type); font-size: 1rem; margin-top: 6px; }
@@ -81,7 +86,7 @@ p + p { margin-top: 12px; }
     <form class="checker" id="checkForm">
       <label for="cardInput">Card number</label>
       <div class="row">
-        <input id="cardInput" type="text" inputmode="numeric" placeholder="e.g. 10234" autocomplete="off">
+        <input id="cardInput" type="text" inputmode="numeric" placeholder="e.g. 14554" autocomplete="off">
         <button type="submit">Check</button>
       </div>
       <p class="feedback" id="feedback" aria-live="polite"></p>
@@ -89,7 +94,7 @@ p + p { margin-top: 12px; }
   </div>
 
   <div id="revealStep" class="reveal-wrap" hidden>
-    <span class="win-kicker">Case closed</span>
+    <span class="win-kicker">Good job &mdash; you earned this</span>
     <h2 class="win-title">You caught him.</h2>
     <p class="win-stats">176 checkouts. 4 clues. 1 correct card number. <b>You did it.</b></p>
     <div class="reveal">
@@ -102,6 +107,7 @@ p + p { margin-top: 12px; }
       <p>He'd been a patron since the library's very first year open &mdash; card number 10234, the lowest ever issued, a fact Margo used to bring up fondly. That night, he grabbed a book on his way to the Rare Books room, to look like he was there for the showcase like everyone else.</p>
       <p>The book was <i>The Founding Harbor.</i> He never got the chance to read it.</p>
     </div>
+    <span class="stamp">Case closed</span>
   </div>
 
   <a class="back" href="index.html">&larr; Back to eliminationmysteries.com</a>
